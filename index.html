@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="./css-svg/style.css"/>
+    <script src="./scripts/jquery-3.4.0.slim.min.js"></script>
+    <script src="./scripts/ui_script.js"></script>
     <title>Mars Photo Search App</title>
 </head>
 <body>
@@ -19,7 +21,7 @@
                 <h3 class="mt-4 mb-3 text-white">Curiosity</h3>
                     <form action="submit" class="form-group">
                         <label for="sol" class="text-white">Sol</label>
-                        <input type="date" class="form-control form-control-sm mb-2" id="date-control"/>
+                        <input type="number" class="form-control form-control-sm mb-2" id="sol-control"/>
             
                         <label for="camera" class="text-white">Camera</label>
                         <select class="form-control form-control-sm" id="camera-selection">
@@ -33,7 +35,7 @@
                             <option value="NAVCAM">Navigation Camera</option>
                         </select>
             
-                        <button type="button" class="btn btn-success mt-2" id="submit">Find Photos</button> 
+                        <button type="button" class="btn btn-success mt-2" id="find-photos">Find Photos</button> 
                     </form>
             </div>
         </div>
@@ -44,10 +46,12 @@
                 <embed type="image/svg+xml" src="./css-svg/loading.svg" class="mx-auto"/>
             </div>
 
-            <div >
-
+            <div class="row" id="images-div">
+                
             </div>
         </div>
     </div>
+
+    
 </body>
 </html>
