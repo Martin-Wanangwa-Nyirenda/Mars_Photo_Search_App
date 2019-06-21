@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    const api_key = "";//Add api key from Nasa
+    const api_key = "a8MiSOcIlGh3beHhAvF2ehJQ4ZAfRnjBp19wSg9x";//Add api key from Nasa
     let sol = "";
     let camera = "any";
     let jsonRes = "";
