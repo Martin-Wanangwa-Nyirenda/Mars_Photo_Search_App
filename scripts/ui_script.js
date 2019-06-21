@@ -1,17 +1,19 @@
 $(document).ready(function(){
-    var api_key = "";
-    var sol = "";
-    var camera = "any";
-    var jsonRes = "";
+    const api_key = "a8MiSOcIlGh3beHhAvF2ehJQ4ZAfRnjBp19wSg9x";
+    let sol = "";
+    let camera = "any";
+    let jsonRes = "";
+
+    $("#camera-selection option[value=any]").attr("selected", "selected");
 
     $("#camera-selection").change(function(){
-        camera = $(this).val();
+        camera = $(this).val();   
     });
 
     $("#find-photos").click(function() {
+        $("#images-div").empty();
         $("#loading-svg").show();
         sol = $("#sol-control").val();    
-        console.log(camera + "vo");
         getPhotosFromAPI(sol, camera);   
     })
     
@@ -29,10 +31,12 @@ $(document).ready(function(){
 
     function getPhotosFromAPI(sol, camera) {
         var url = "";
-        if(camera = "any"){
-            url = url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=" + sol
-            + "&api_key=" + api_key; 
-        }else{
+        jsonRes = "";
+        if(camera == "any"){
+            url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=" + sol
+            + "&api_key=" + api_key;
+            
+        }else if(camera != "any"){
             url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=" + sol + "&camera=" + camera
             + "&api_key=" + api_key;
         }
@@ -46,12 +50,28 @@ $(document).ready(function(){
     }
     
     function viewPhotos(){
-        var html = "";
-        for (let i = 0; i < jsonRes.photos.length; i++) {
-            html += "<div class='m-2 mx-auto'><img class='image' src='" + jsonRes.photos[i].img_src + "' /></div>" 
+        
+        let html = "";
+        let image_url = "";
+        if(jsonRes.photos.length == 0){
+            html += "<div class='m-2 mx-auto'>No Photos Found!</div>" ;
+            $("#images-div").append(html);
+            return;  
         }
-        $("#images-div").empty();
+        for (let n = 0; n < 20; n++) {
+            
+            if(jsonRes.photos[n] == null)
+                break;
+            
+            image_url = getPhoto(jsonRes.photos, n);
+            html += "<div class='m-2 mx-auto'><img class='image' src='" + image_url + "' /></div>" 
+        }
+        
         $("#images-div").append(html);
+    }
+
+    function getPhoto(array, index){
+        return array[index].img_src;
     }
 }); 
 
